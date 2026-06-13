@@ -44,14 +44,13 @@
 	"suggest": {
 		"wackowiki/safehtml": "The companion SafeHTML filter that uses HTMLSax3."
 	},
-	"autoload": {
-		"psr-4": {
-			"HTMLSax3\\": "src/"
-		},
-		"files": [
-			"src/helpers.php"
-		]
-	},
+    "autoload": {
+        "psr-4": {
+            "HTMLSax3\\": "src/"
+        },
+        "classmap": ["src/"],
+        "files": ["src/helpers.php"]
+    }
 	"autoload-dev": {
 		"psr-4": {
 			"HTMLSax3\\Tests\\": "tests/"
