@@ -1,8 +1,8 @@
 {
-	"name": "wackowiki/htmlsax3",
-	"description": "A modernized PHP 8.5-compatible port of the classic HTMLSax3 SAX-style parser for HTML/XML, used by SafeHTML in WackoWiki.",
-	"type": "library",
-	"keywords": [
+	"name" : "wackowiki/htmlsax3",
+	"description" : "A modernized PHP 8.5-compatible port of the classic HTMLSax3 SAX-style parser for HTML/XML, used by SafeHTML in WackoWiki.",
+	"type" : "library",
+	"keywords" : [
 		"sax",
 		"parser",
 		"html",
@@ -10,72 +10,70 @@
 		"safehtml",
 		"wackowiki"
 	],
-	"license": "BSD-3-Clause",
-	"authors": [
-		{
-			"name": "Alexander Zhukov",
-			"email": "alex@veresk.ru",
-			"role": "Original Python port"
-		},
-		{
-			"name": "Harry Fuecks",
-			"email": "hfuecks@phppatterns.com",
-			"role": "PEAR port"
-		},
-		{
-			"name": "WackoWiki Team",
-			"role": "Maintainer"
+	"license" : "BSD-3-Clause",
+	"authors" : [{
+			"name" : "Alexander Zhukov",
+			"email" : "alex@veresk.ru",
+			"role" : "Original Python port"
+		}, {
+			"name" : "Harry Fuecks",
+			"email" : "hfuecks@phppatterns.com",
+			"role" : "PEAR port"
+		}, {
+			"name" : "WackoWiki Team",
+			"role" : "Maintainer"
 		}
 	],
-	"support": {
-		"issues": "https://github.com/WackoWiki/htmlsax3/issues",
-		"source": "https://github.com/WackoWiki/htmlsax3",
-		"wiki": "https://wackowiki.org/doc/Dev/Projects/SafeHTML"
+	"support" : {
+		"issues" : "https://github.com/WackoWiki/htmlsax3/issues",
+		"source" : "https://github.com/WackoWiki/htmlsax3",
+		"wiki" : "https://wackowiki.org/doc/Dev/Projects/SafeHTML"
 	},
-	"require": {
-		"php": "^8.5"
+	"require" : {
+		"php" : "^8.5"
 	},
-	"require-dev": {
-		"phpunit/phpunit": "^11.5",
-		"phpstan/phpstan": "^2.1",
-		"php-cs-fixer/shim": "^3.86",
-		"squizlabs/php_codesniffer": "^3.13"
+	"require-dev" : {
+		"phpunit/phpunit" : "^11.5",
+		"phpstan/phpstan" : "^2.1",
+		"php-cs-fixer/shim" : "^3.86",
+		"squizlabs/php_codesniffer" : "^3.13"
 	},
-	"suggest": {
-		"wackowiki/safehtml": "The companion SafeHTML filter that uses HTMLSax3."
+	"suggest" : {
+		"wackowiki/safehtml" : "The companion SafeHTML filter that uses HTMLSax3."
 	},
-    "autoload": {
-        "psr-4": {
-            "HTMLSax3\\": "src/"
-        },
-        "classmap": ["src/"],
-        "files": ["src/helpers.php"]
-    },
-	"autoload-dev": {
-		"psr-4": {
-			"HTMLSax3\\Tests\\": "tests/"
+	"autoload" : {
+		"psr-4" : {
+			"HTMLSax3\\" : "src/"
+		},
+		"files" : [
+			"src/helpers.php"
+		]
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"HTMLSax3\\Tests\\" : "tests/"
 		}
 	},
-	"config": {
-		"optimize-autoloader": true,
-		"preferred-install": "dist",
-		"sort-packages": true,
-		"allow-plugins": {
-			"php-cs-fixer/shim": true
+	"config" : {
+		"optimize-autoloader" : true,
+		"preferred-install" : "dist",
+		"sort-packages" : true,
+		"allow-plugins" : {
+			"php-cs-fixer/shim" : true
 		}
 	},
-	"scripts": {
-		"test": "phpunit",
-		"test:coverage": "phpunit --coverage-html coverage/",
-		"stan": "phpstan analyse src tests --level=max",
-		"cs-fix": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
-		"cs-check": "php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run --diff",
-		"phpcs": "phpcs --standard=PSR12 src tests"
+	"scripts" : {
+		"test" : "phpunit",
+		"test:coverage" : "phpunit --coverage-html coverage/",
+		"stan" : "phpstan analyse src tests --level=max",
+		"cs-fix" : "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
+		"cs-check" : "php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run --diff",
+		"phpcs" : "phpcs --standard=PSR12 src tests"
 	},
-	"minimum-stability": "stable",
-	"prefer-stable": true,
-	"archive": {
-		"exclude": [
+	"minimum-stability" : "stable",
+	"prefer-stable" : true,
+	"archive" : {
+		"exclude" : [
 			"/tests",
 			"/.github",
 			"/.php-cs-fixer.dist.php",

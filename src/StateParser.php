@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace HTMLSax3;
 
-require_once __DIR__ . '/helpers.php';
-
 /**
  * Define parser states.
  *
@@ -164,13 +162,13 @@ class StateParser
 	{
 		$this->htmlsax = &$htmlsax;
 
-		$this->State[STATE_START]       = new StartingState();
-		$this->State[STATE_CLOSING_TAG] = new ClosingTagState();
-		$this->State[STATE_TAG]         = new TagState();
-		$this->State[STATE_OPENING_TAG] = new OpeningTagState();
-		$this->State[STATE_PI]          = new PiState();
-		$this->State[STATE_JASP]        = new JaspState();
-		$this->State[STATE_ESCAPE]      = new EscapeState();
+		$this->State[STATE_START]       = new \HTMLSax3\States\StartingState();
+		$this->State[STATE_CLOSING_TAG] = new \HTMLSax3\States\ClosingTagState();
+		$this->State[STATE_TAG]         = new \HTMLSax3\States\TagState();
+		$this->State[STATE_OPENING_TAG] = new \HTMLSax3\States\OpeningTagState();
+		$this->State[STATE_PI]          = new \HTMLSax3\States\PiState();
+		$this->State[STATE_JASP]        = new \HTMLSax3\States\JaspState();
+		$this->State[STATE_ESCAPE]      = new \HTMLSax3\States\EscapeState();
 
 		$this->parser_options['XML_OPTION_TRIM_DATA_NODES']  = 0;
 		$this->parser_options['XML_OPTION_CASE_FOLDING']      = 0;
@@ -277,7 +275,7 @@ class StateParser
 	{
 		if ($this->parser_options['XML_OPTION_TRIM_DATA_NODES'] === 1)
 		{
-			$decorator = new Trim(
+			$decorator = new \HTMLSax3\Decorators\Trim(
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
@@ -287,7 +285,7 @@ class StateParser
 
 		if ($this->parser_options['XML_OPTION_CASE_FOLDING'] === 1)
 		{
-			$open_decor = new CaseFolding(
+			$open_decor = new \HTMLSax3\Decorators\CaseFolding(
 				$this->handler_object_element,
 				$this->handler_method_opening,
 				$this->handler_method_closing,
@@ -299,7 +297,7 @@ class StateParser
 
 		if ($this->parser_options['XML_OPTION_LINEFEED_BREAK'] === 1)
 		{
-			$decorator = new Linefeed(
+			$decorator = new \HTMLSax3\Decorators\Linefeed(
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
@@ -309,7 +307,7 @@ class StateParser
 
 		if ($this->parser_options['XML_OPTION_TAB_BREAK'] === 1)
 		{
-			$decorator = new Tab(
+			$decorator = new \HTMLSax3\Decorators\Tab(
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
@@ -319,7 +317,7 @@ class StateParser
 
 		if ($this->parser_options['XML_OPTION_ENTITIES_UNPARSED'] === 1)
 		{
-			$decorator = new Entities_Unparsed(
+			$decorator = new \HTMLSax3\Decorators\Entities_Unparsed(
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
@@ -329,7 +327,7 @@ class StateParser
 
 		if ($this->parser_options['XML_OPTION_ENTITIES_PARSED'] === 1)
 		{
-			$decorator = new Entities_Parsed(
+			$decorator = new \HTMLSax3\Decorators\Entities_Parsed(
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
@@ -340,7 +338,7 @@ class StateParser
 		// Note switched on by default
 		if ($this->parser_options['XML_OPTION_STRIP_ESCAPES'] === 1)
 		{
-			$decorator = new Escape_Stripper(
+			$decorator = new \HTMLSax3\Decorators\Escape_Stripper(
 				$this->handler_object_escape,
 				$this->handler_method_escape,
 				);

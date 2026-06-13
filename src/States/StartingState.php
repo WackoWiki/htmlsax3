@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HTMLSax3;
+namespace HTMLSax3\States;
 
 /**
  * StartingState searches for the start of any XML tag

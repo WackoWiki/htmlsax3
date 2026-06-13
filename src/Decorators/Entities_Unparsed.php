@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HTMLSax3;
+namespace HTMLSax3\Decorators;
 
 /**
  * Breaks up data by XML entities but leaves them unparsed,
