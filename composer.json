@@ -50,7 +50,7 @@
         },
         "classmap": ["src/"],
         "files": ["src/helpers.php"]
-    }
+    },
 	"autoload-dev": {
 		"psr-4": {
 			"HTMLSax3\\Tests\\": "tests/"
