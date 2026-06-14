@@ -24,7 +24,7 @@ class TagState
 			'?'     => STATE_PI,
 			'%'     => STATE_JASP,
 			'!'     => STATE_ESCAPE,
-			default => tap(STATE_OPENING_TAG, static function () use ($context): void
+			default => \HTMLSax3\tap(STATE_OPENING_TAG, static function () use ($context): void
 			{
 				$context->unscanCharacter();
 		}),

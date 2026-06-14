@@ -44,11 +44,11 @@ class Trim
 
 	/**
 	 * Trims the data
-	 * @param HTMLSax3 $parser
+	 * @param \HTMLSax3\HTMLSax3 $parser
 	 * @param string $data element data
 	 * @access protected
 	 */
-	public function trimData(HTMLSax3 $parser, string $data): void
+	public function trimData(\HTMLSax3\HTMLSax3 $parser, string $data): void
 	{
 		$data = trim($data);
 

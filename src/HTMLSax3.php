@@ -24,6 +24,7 @@ declare(strict_types=1);
 
 namespace HTMLSax3;
 
+use HTMLSax3\States\StateParser;
 use InvalidArgumentException;
 
 /**
@@ -66,7 +67,7 @@ class HTMLSax3
 	 */
 	public function __construct()
 	{
-		$this->state_parser = new StateParser($this);
+		$this->state_parser = new \HTMLSax3\States\StateParser($this);
 
 		$nullhandler = new NullHandler();
 		$this->set_object($nullhandler);

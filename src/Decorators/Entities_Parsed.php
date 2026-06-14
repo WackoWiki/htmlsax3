@@ -40,11 +40,11 @@ class Entities_Parsed
 
 	/**
 	 * Breaks the data up by XML entities
-	 * @param HTMLSax3 $parser
+	 * @param \HTMLSax3\HTMLSax3 $parser
 	 * @param string $data element data
 	 * @access protected
 	 */
-	public function breakData(HTMLSax3 $parser, string $data): void
+	public function breakData(\HTMLSax3\HTMLSax3 $parser, string $data): void
 	{
 		$chunks = preg_split(
 			'/(&.+?;)/',

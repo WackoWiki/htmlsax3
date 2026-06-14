@@ -40,11 +40,11 @@ class Escape_Stripper
 
 	/**
 	 * Breaks the data up by XML entities
-	 * @param HTMLSax3 $parser
+	 * @param \HTMLSax3\HTMLSax3 $parser
 	 * @param string $data element data
 	 * @access protected
 	 */
-	public function strip(HTMLSax3 $parser, string $data): void
+	public function strip(\HTMLSax3\HTMLSax3 $parser, string $data): void
 	{
 		// Check for HTML comments first
 		if (str_starts_with($data, '--'))

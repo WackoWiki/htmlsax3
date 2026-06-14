@@ -40,11 +40,11 @@ class Linefeed
 
 	/**
 	 * Breaks the data up by linefeeds
-	 * @param HTMLSax3 $parser
+	 * @param \HTMLSax3\HTMLSax3 $parser
 	 * @param string $data element data
 	 * @access protected
 	 */
-	public function breakData(HTMLSax3 $parser, string $data): void
+	public function breakData(\HTMLSax3\HTMLSax3 $parser, string $data): void
 	{
 		foreach (explode("\n", $data) as $chunk)
 		{

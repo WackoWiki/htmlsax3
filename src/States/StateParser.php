@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace HTMLSax3;
+namespace HTMLSax3\States;
+
+use HTMLSax3\HTMLSax3;
 
 /**
  * Define parser states.
@@ -162,13 +164,13 @@ class StateParser
 	{
 		$this->htmlsax = &$htmlsax;
 
-		$this->State[STATE_START]       = new \HTMLSax3\States\StartingState();
-		$this->State[STATE_CLOSING_TAG] = new \HTMLSax3\States\ClosingTagState();
-		$this->State[STATE_TAG]         = new \HTMLSax3\States\TagState();
-		$this->State[STATE_OPENING_TAG] = new \HTMLSax3\States\OpeningTagState();
-		$this->State[STATE_PI]          = new \HTMLSax3\States\PiState();
-		$this->State[STATE_JASP]        = new \HTMLSax3\States\JaspState();
-		$this->State[STATE_ESCAPE]      = new \HTMLSax3\States\EscapeState();
+		$this->State[STATE_START]       = new StartingState();
+		$this->State[STATE_CLOSING_TAG] = new ClosingTagState();
+		$this->State[STATE_TAG]         = new TagState();
+		$this->State[STATE_OPENING_TAG] = new OpeningTagState();
+		$this->State[STATE_PI]          = new PiState();
+		$this->State[STATE_JASP]        = new JaspState();
+		$this->State[STATE_ESCAPE]      = new EscapeState();
 
 		$this->parser_options['XML_OPTION_TRIM_DATA_NODES']  = 0;
 		$this->parser_options['XML_OPTION_CASE_FOLDING']      = 0;
@@ -367,3 +369,4 @@ class StateParser
 		while ($state !== STATE_STOP && $this->position < $this->length);
 	}
 }
+

@@ -48,13 +48,13 @@ class CaseFolding
 
 	/**
 	 * Folds up open tag callbacks
-	 * @param HTMLSax3 $parser
+	 * @param \HTMLSax3\HTMLSax3 $parser
 	 * @param string $tag tag name
 	 * @param array $attrs tag attributes
 	 * @param bool $empty
 	 * @access protected
 	 */
-	public function foldOpen(HTMLSax3 $parser, string $tag, array $attrs = [], bool $empty = false): void
+	public function foldOpen(\HTMLSax3\HTMLSax3 $parser, string $tag, array $attrs = [], bool $empty = false): void
 	{
 		$this->orig_obj->{$this->orig_open_method}(
 		$parser,
@@ -66,12 +66,12 @@ class CaseFolding
 
 	/**
 	 * Folds up close tag callbacks
-	 * @param HTMLSax3 $parser
+	 * @param \HTMLSax3\HTMLSax3 $parser
 	 * @param string $tag tag name
 	 * @param bool $empty
 	 * @access protected
 	 */
-	public function foldClose(HTMLSax3 $parser, string $tag, bool $empty = false): void
+	public function foldClose(\HTMLSax3\HTMLSax3 $parser, string $tag, bool $empty = false): void
 	{
 		$this->orig_obj->{$this->orig_close_method}(
 		$parser,
