@@ -10,7 +10,7 @@ A modernized **PHP 8.5-compatible** port of the classic HTMLSax3 SAX-style parse
 
 - **PHP 8.5 ready** — strict types, constructor property promotion, match expressions, `readonly` properties where applicable, no legacy quirks.
 - **Zero PEAR dependency** — the original `PEAR::raiseError()` calls have been replaced with native `InvalidArgumentException`.
-- **PSR-4 autoloaded** under the `HTMLSax3\` namespace.
+- **PSR-4 autoloaded** under the `HTMLSax3\` namespace with sub-namespaces for `States\` and `Decorators\`.
 - **Fully decorator-driven** options system — trim, case-folding, entity parsing, escape stripping, linefeed/tab breaks.
 - **Lightweight** — no external dependencies, runs anywhere PHP 8.5+ runs.
 - **Used in production** by [SafeHTML](https://wackowiki.org/doc/Dev/Projects/SafeHTML) and [WackoWiki](https://wackowiki.org).
@@ -51,13 +51,20 @@ The `symlink: true` option means edits to your local `src/lib/HTMLSax3/` are pic
 
 ### Manual installation
 
-If you can't use Composer, download the `src/` directory and require each file manually:
+If you can't use Composer, require the autoloader (or each file in dependency order):
 
 ```php
 require_once 'src/helpers.php';
 require_once 'src/HTMLSax3.php';
-require_once 'src/StateParser.php';
 require_once 'src/NullHandler.php';
+require_once 'src/States/StateParser.php';
+require_once 'src/States/StartingState.php';
+require_once 'src/States/TagState.php';
+require_once 'src/States/OpeningTagState.php';
+require_once 'src/States/ClosingTagState.php';
+require_once 'src/States/EscapeState.php';
+require_once 'src/States/PiState.php';
+require_once 'src/States/JaspState.php';
 require_once 'src/Decorators/CaseFolding.php';
 require_once 'src/Decorators/Entities_Parsed.php';
 require_once 'src/Decorators/Entities_Unparsed.php';
@@ -65,14 +72,36 @@ require_once 'src/Decorators/Escape_Stripper.php';
 require_once 'src/Decorators/Linefeed.php';
 require_once 'src/Decorators/Tab.php';
 require_once 'src/Decorators/Trim.php';
-require_once 'src/States/ClosingTagState.php';
-require_once 'src/States/EscapeState.php';
-require_once 'src/States/JaspState.php';
-require_once 'src/States/OpeningTagState.php';
-require_once 'src/States/PiState.php';
-require_once 'src/States/StartingState.php';
-require_once 'src/States/TagState.php';
 ```
+
+---
+
+## Namespace map
+
+All classes live under `HTMLSax3\`:
+
+| File | Namespace |
+|------|-----------|
+| `src/HTMLSax3.php` | `HTMLSax3` |
+| `src/NullHandler.php` | `HTMLSax3` |
+| `src/helpers.php` | `HTMLSax3` (provides the `HTMLSax3\tap()` function) |
+| `src/States/StateParser.php` | `HTMLSax3\States` |
+| `src/States/StartingState.php` | `HTMLSax3\States` |
+| `src/States/ClosingTagState.php` | `HTMLSax3\States` |
+| `src/States/EscapeState.php` | `HTMLSax3\States` |
+| `src/States/JaspState.php` | `HTMLSax3\States` |
+| `src/States/OpeningTagState.php` | `HTMLSax3\States` |
+| `src/States/PiState.php` | `HTMLSax3\States` |
+| `src/States/TagState.php` | `HTMLSax3\States` |
+| `src/Decorators/CaseFolding.php` | `HTMLSax3\Decorators` |
+| `src/Decorators/Entities_Parsed.php` | `HTMLSax3\Decorators` |
+| `src/Decorators/Entities_Unparsed.php` | `HTMLSax3\Decorators` |
+| `src/Decorators/Escape_Stripper.php` | `HTMLSax3\Decorators` |
+| `src/Decorators/Linefeed.php` | `HTMLSax3\Decorators` |
+| `src/Decorators/Tab.php` | `HTMLSax3\Decorators` |
+| `src/Decorators/Trim.php` | `HTMLSax3\Decorators` |
+
+The parser-state constants (`STATE_START`, `STATE_TAG`, `STATE_OPENING_TAG`, `STATE_CLOSING_TAG`, `STATE_ESCAPE`, `STATE_JASP`, `STATE_PI`, `STATE_STOP`) are declared as global constants at the top of `src/States/StateParser.php` for backward compatibility with code that referenced them directly.
 
 ---
 
@@ -228,18 +257,19 @@ The public API is **fully preserved**. Existing handler code works without modif
 
 | Change | Reason |
 |--------|--------|
-| Namespace added: `HTMLSax3\` | PSR-4 autoloading |
+| Namespace added: `HTMLSax3\` with `HTMLSax3\States\` and `HTMLSax3\Decorators\` sub-namespaces | PSR-4 autoloading |
+| `StateParser` moved from `src/StateParser.php` to `src/States/StateParser.php` (namespace `HTMLSax3\States`) | Co-location with the state classes it coordinates |
 | `PEAR::raiseError()` → `InvalidArgumentException` | PEAR is unmaintained |
 | Inconsistent `ScanCharacter()` / `IgnoreCharacter()` unified to lowercase | PHP 8 method-name conventions |
 | `function DoNothing()` → `function DoNothing(mixed ...$_args): void` | Variadic handles every SAX callback arity |
 | Strict types enabled | PHP 8.5 best practice |
 
-If you have a non-Composer installation, add this to your bootstrap:
+If you have a non-Composer installation that referenced `HTMLSax3\StateParser` at the root, add this to your bootstrap:
 
 ```php
-// Shim for legacy code that referenced the global HTMLSax3 class.
-if (!class_exists('HTMLSax3', false)) {
-    class_alias(\HTMLSax3\HTMLSax3::class, 'HTMLSax3');
+// Shim for legacy code that referenced the old root-namespace StateParser.
+if (!class_exists('HTMLSax3\StateParser', false)) {
+    class_alias(\HTMLSax3\States\StateParser::class, 'HTMLSax3\StateParser');
 }
 ```
 
@@ -275,12 +305,11 @@ composer phpcs             # PSR-12 sniffs
 
 ```
 src/
-├── helpers.php              # tap() helper
-├── HTMLSax3.php             # User-facing facade
-├── StateParser.php          # State-machine coordinator
-├── NullHandler.php          # No-op default handler
+├── helpers.php                # HTMLSax3\tap() helper
+├── HTMLSax3.php               # User-facing facade (namespace HTMLSax3)
+├── NullHandler.php            # No-op default handler (namespace HTMLSax3)
 ├── Decorators/
-│   ├── CaseFolding.php
+│   ├── CaseFolding.php        # namespace HTMLSax3\Decorators
 │   ├── Entities_Parsed.php
 │   ├── Entities_Unparsed.php
 │   ├── Escape_Stripper.php
@@ -288,7 +317,10 @@ src/
 │   ├── Tab.php
 │   └── Trim.php
 └── States/
-    ├── ClosingTagState.php
+    ├── StateParser.php        # State-machine coordinator
+    │                          # (namespace HTMLSax3\States;
+    │                          #  also declares STATE_* constants)
+    ├── ClosingTagState.php    # namespace HTMLSax3\States
     ├── EscapeState.php
     ├── JaspState.php
     ├── OpeningTagState.php
