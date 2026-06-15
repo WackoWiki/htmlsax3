@@ -352,12 +352,7 @@ For bug reports and feature requests, open an issue at <https://github.com/Wacko
 
 ## License
 
-This project is licensed under the **BSD 3-Clause License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **BSD 3-Clause "New" or "Revised" License** — see the [LICENSE](LICENSE) file for details.
 
-```
-Copyright (c) 1997-2002 The PHP Group,
-              2004-2024 Roman Ivanov, Miguel Vazquez Gocobachi,
-              2008-2026 WackoWiki Team.
-```
+> **Historical note:** The original HTMLSax3 source carried a `PHP License 3.0` header. That license has been [retired by the PHP project](https://www.php.net/license/) and superseded by the **PHP License 4.0**, which is itself the **BSD 3-Clause License**. As this library is no longer part of the PEAR ecosystem, the BSD-3-Clause terms now govern all use, modification, and distribution. The original copyright holders are preserved in the `LICENSE` file for historical accuracy.
 
-Original PHP licensing (PHP License 3.0) has been retired with the rest of the PEAR ecosystem — the project's source attribution and copyright notices are preserved above for historical accuracy, but the BSD-3-Clause terms now govern all use, modification, and distribution.

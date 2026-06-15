@@ -1,7 +1,45 @@
+# Composer
 /vendor/
-/composer.lock
-/.phpunit.cache/
-/.phpunit.result.cache
+composer.lock
+
+# PHPUnit
+.phpunit.result.cache
+.phpunit.cache/
 /coverage/
-/.php-cs-fixer.cache
-/.phpstan-cache/
+/build/
+
+# PHPStan
+/phpstan-cache/
+/phpstan-baseline.neon
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Eclipse IDE
+.buildpath
+.project
+.settings/
+
+# PHPStorm IDE
+.idea
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
