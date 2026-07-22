@@ -39,9 +39,9 @@ class CaseFolding
 	 * @param string $orig_close_method original close handler method
 	 * @access protected
 	 */
-	public function __construct(object &$orig_obj, string $orig_open_method, string $orig_close_method)
+	public function __construct(object $orig_obj, string $orig_open_method, string $orig_close_method)
 	{
-		$this->orig_obj          = &$orig_obj;
+		$this->orig_obj          = $orig_obj;
 		$this->orig_open_method  = $orig_open_method;
 		$this->orig_close_method = $orig_close_method;
 	}

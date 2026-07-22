@@ -281,7 +281,7 @@ class StateParser
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
-			$this->handler_object_data = &$decorator;
+			$this->handler_object_data = $decorator;
 			$this->handler_method_data = 'trimData';
 		}
 
@@ -303,7 +303,7 @@ class StateParser
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
-			$this->handler_object_data = &$decorator;
+			$this->handler_object_data = $decorator;
 			$this->handler_method_data = 'breakData';
 		}
 
@@ -313,7 +313,7 @@ class StateParser
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
-			$this->handler_object_data = &$decorator;
+			$this->handler_object_data = $decorator;
 			$this->handler_method_data = 'breakData';
 		}
 
@@ -323,7 +323,7 @@ class StateParser
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
-			$this->handler_object_data = &$decorator;
+			$this->handler_object_data = $decorator;
 			$this->handler_method_data = 'breakData';
 		}
 
@@ -333,7 +333,7 @@ class StateParser
 				$this->handler_object_data,
 				$this->handler_method_data,
 				);
-			$this->handler_object_data = &$decorator;
+			$this->handler_object_data = $decorator;
 			$this->handler_method_data = 'breakData';
 		}
 

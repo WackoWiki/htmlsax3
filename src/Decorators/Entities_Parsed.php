@@ -32,9 +32,9 @@ class Entities_Parsed
 	 * @param string $orig_method original handler method
 	 * @access protected
 	 */
-	public function __construct(object &$orig_obj, string $orig_method)
+	public function __construct(object $orig_obj, string $orig_method)
 	{
-		$this->orig_obj    = &$orig_obj;
+		$this->orig_obj    = $orig_obj;
 		$this->orig_method = $orig_method;
 	}
 
@@ -55,7 +55,7 @@ class Entities_Parsed
 
 		foreach ($chunks as $chunk)
 		{
-			$decoded = html_entity_decode($chunk, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+			$decoded = html_entity_decode($chunk, ENT_NOQUOTES, 'UTF-8');
 			$this->orig_obj->{$this->orig_method}($this, $decoded);
 		}
 	}

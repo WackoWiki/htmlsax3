@@ -36,9 +36,9 @@ class Trim
 	 * @param string $orig_method original handler method
 	 * @access protected
 	 */
-	public function __construct(object &$orig_obj, string $orig_method)
+	public function __construct(object $orig_obj, string $orig_method)
 	{
-		$this->orig_obj    = &$orig_obj;
+		$this->orig_obj    = $orig_obj;
 		$this->orig_method = $orig_method;
 	}
 

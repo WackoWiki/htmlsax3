@@ -79,9 +79,9 @@ class HTMLSax3
 	 * @access public
 	 * @return true
 	 */
-	public function set_object(object &$object): true
+	public function set_object(object $object): true
 	{
-		$this->state_parser->handler_default = &$object;
+		$this->state_parser->handler_default = $object;
 
 		return true;
 	}
